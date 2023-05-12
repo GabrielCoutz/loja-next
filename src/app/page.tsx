@@ -1,7 +1,6 @@
 import Link from "next/link";
-
-import { Card } from "./components/Card";
-import { IProductList } from "./interfaces/product";
+import { Card } from "../components/Card";
+import { IProductList } from "../interfaces/product";
 
 export default async function Page() {
   const { products }: Record<"products", IProductList> = await (
@@ -24,7 +23,7 @@ export default async function Page() {
             key={product.id}
             className="p-2 w-1/4 max-lg:w-2/4 max-w-md inline-block"
           >
-            <Link href="">
+            <Link href={`/product/${product.id}`}>
               <Card.Wrapper>
                 <Card.Image alt={product.title} src={product.thumbnail} />
                 <Card.Title>{product.title}</Card.Title>
