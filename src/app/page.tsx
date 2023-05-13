@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { Card } from "../components/Card";
-import { IProductList } from "../interfaces/product";
+import { getProducts } from "../services/api/product";
 
 export default async function Page() {
-  const { products }: Record<"products", IProductList> = await (
-    await fetch(`${process.env.API_URL}/products`)
-  ).json();
+  const products = await getProducts();
 
   return (
     <>
