@@ -4,15 +4,17 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { IloginSchema, loginSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Form } from "../../components/Form";
 
 const Login = () => {
+  const loginFormMethods = useForm<IloginSchema>({
+    resolver: zodResolver(loginSchema),
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IloginSchema>({
-    resolver: zodResolver(loginSchema),
-  });
+  } = loginFormMethods;
 
   const handleLogin = (payload: IloginSchema) => {
     console.log(payload);
@@ -21,42 +23,26 @@ const Login = () => {
   return (
     <>
       <h1>É bom te ver de novo</h1>
-      <form
+      <Form.Wrapper
         onSubmit={handleSubmit(handleLogin)}
-        className="mx-auto max-w-sm p-4 shadow rounded-sm space-y-4"
+        formMethods={loginFormMethods}
       >
-        <div className="flex flex-col gap-x-2">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            {...register("email")}
-            className="bg-zinc-200 rounded border focus:border-indigo-600"
-          />
-          {errors.email?.message && (
-            <span className="text-red-400 font-medium text-sm">
-              {errors.email?.message}
-            </span>
-          )}
-        </div>
+        <Form.Field>
+          <Form.Label htmlFor="email">Email</Form.Label>
+          <Form.Input type="email" name="email" />
+          <Form.Erro field="email" />
+        </Form.Field>
 
-        <div className="flex flex-col gap-x-2">
-          <label htmlFor="password">Senha</label>
-          <input
-            type="password"
-            {...register("password")}
-            className="bg-zinc-200 rounded border focus:border-indigo-600"
-          />
-          {errors.password?.message && (
-            <span className="text-red-400 font-medium text-sm">
-              {errors.password?.message}
-            </span>
-          )}
-        </div>
+        <Form.Field>
+          <Form.Label htmlFor="password">Senha</Form.Label>
+          <Form.Input type="password" name="password" />
+          <Form.Erro field="password" />
+        </Form.Field>
 
         <button className="py-2 px-4 bg-indigo-500 text-white rounded">
           Enviar
         </button>
-      </form>
+      </Form.Wrapper>
     </>
   );
 };
