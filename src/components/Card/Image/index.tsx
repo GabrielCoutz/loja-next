@@ -6,9 +6,6 @@ interface ImageProps {
 }
 
 export const ProductImage = ({ alt, src }: ImageProps) => {
-  // const [loading, setLoading] = useState(true);
-  // const loadComplete = () => setLoading(false);
-
   return (
     <Image
       alt={alt}
