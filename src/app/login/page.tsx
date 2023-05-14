@@ -1,23 +1,31 @@
 "use client";
 
-import React from "react";
 import { useForm } from "react-hook-form";
-import { IloginSchema, loginSchema } from "./schema";
+import React, { useState } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IloginSchema, loginSchema } from "./schema";
+import { Button } from "../../components/Button";
 import { Form } from "../../components/Form";
+import { loginUser } from "../../services/api/auth";
+import { Ui } from "../../components/UI";
 
 const Login = () => {
   const loginFormMethods = useForm<IloginSchema>({
     resolver: zodResolver(loginSchema),
   });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = loginFormMethods;
+  const { handleSubmit } = loginFormMethods;
+  const [message, setMessage] = useState("");
 
-  const handleLogin = (payload: IloginSchema) => {
-    console.log(payload);
+  const handleLogin = async (payload: IloginSchema) => {
+    setMessage("");
+
+    const result = await loginUser(payload);
+    console.log(result);
+
+    if ("message" in result) return setMessage(result.message);
+
+    console.log("deu certo");
   };
 
   return (
@@ -39,9 +47,8 @@ const Login = () => {
           <Form.Erro field="password" />
         </Form.Field>
 
-        <button className="py-2 px-4 bg-indigo-500 text-white rounded">
-          Enviar
-        </button>
+        <Ui.Message>{message}</Ui.Message>
+        <Button.Primary>Enviar</Button.Primary>
       </Form.Wrapper>
     </>
   );
