@@ -1,5 +1,6 @@
 declare namespace NodeJS {
   interface ProcessEnv {
-    API_URL: string;
+    PRODUCTS_API_URL: string;
+    USER_API_URL: string;
   }
 }
