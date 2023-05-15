@@ -10,12 +10,4 @@ export interface ICreateUserPayload {
   password: string;
 }
 
-export type ICreateUserSuccessResponse = IUser;
-
-export interface ICreateUserFailResponse {
-  message: string;
-}
-
-export type ICreateUserResponse =
-  | ICreateUserSuccessResponse
-  | ICreateUserFailResponse;
+export type ICreateUserResponse = IUser;
