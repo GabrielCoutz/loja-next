@@ -1,4 +1,4 @@
-import { ICreateUserPayload, ICreateUserResponse } from "./interface";
+import { ICreateUserPayload, ICreateUserResponse, IUser } from "./interface";
 
 export const createUser = async (
   payload: ICreateUserPayload
@@ -12,6 +12,12 @@ export const createUser = async (
       body: JSON.stringify(payload),
     })
   ).json();
+
+  return result;
+};
+
+export const getUser = async (id: string): Promise<IUser> => {
+  const result = await (await fetch(`/api/user/${id}`)).json();
 
   return result;
 };
