@@ -28,6 +28,7 @@ export const LoginForm = () => {
 
   return (
     <Form.Wrapper
+      className="mx-auto max-w-sm p-4 shadow rounded-sm space-y-4"
       onSubmit={handleSubmit(handleLogin)}
       formMethods={loginFormMethods}
     >

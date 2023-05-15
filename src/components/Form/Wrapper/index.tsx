@@ -5,15 +5,13 @@ interface WrapperProps {
   onSubmit: () => void;
   children: ReactNode;
   formMethods: any;
+  className?: string;
 }
 
 export const Wrapper = (props: WrapperProps) => {
   return (
     <FormProvider {...props.formMethods}>
-      <form
-        className="mx-auto max-w-sm p-4 shadow rounded-sm space-y-4"
-        onSubmit={props.onSubmit}
-      >
+      <form className={props.className} onSubmit={props.onSubmit}>
         {props.children}
       </form>
     </FormProvider>
