@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { ProductModal } from "../../../../../../components/ProductModal";
+import { Modal } from "../../../../../../components/Modal";
 import { IProduct } from "../../../../../../services/api/product/interface";
 
 interface ModalProps {
@@ -10,13 +10,13 @@ interface ModalProps {
   };
 }
 
-const Modal = async ({ params }: ModalProps) => {
+const ProductModal = async ({ params }: ModalProps) => {
   const product: IProduct = await (
     await fetch(`${process.env.PRODUCTS_API_URL}/products/${params.id}`)
   ).json();
 
   return (
-    <ProductModal>
+    <Modal>
       <Image
         alt={product.title}
         src={product.images[+params.index]}
@@ -24,8 +24,8 @@ const Modal = async ({ params }: ModalProps) => {
         height={700}
         className="rounded bg-gray-300"
       />
-    </ProductModal>
+    </Modal>
   );
 };
 
-export default Modal;
+export default ProductModal;
