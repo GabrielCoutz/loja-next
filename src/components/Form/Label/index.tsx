@@ -6,5 +6,9 @@ interface LabelProps
 }
 
 export const Label = (props: LabelProps) => {
-  return <label {...props}>{props.children}</label>;
+  return (
+    <label {...props} htmlFor={props.htmlFor}>
+      {props.children}
+    </label>
+  );
 };
