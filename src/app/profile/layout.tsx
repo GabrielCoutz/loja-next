@@ -1,14 +1,24 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, ReactNode } from "react";
 
-const ProfileLayout = ({ children }: PropsWithChildren) => {
+interface ProfileLayoutProps {
+  children: ReactNode;
+  modal: ReactNode;
+}
+
+const ProfileLayout = ({ children, modal }: ProfileLayoutProps) => {
   const userIsLogged = cookies().get("token")?.value;
 
   if (!userIsLogged) redirect("/login");
 
-  return <>{children}</>;
+  return (
+    <>
+      {modal}
+      {children}
+    </>
+  );
 };
 
 export default ProfileLayout;
