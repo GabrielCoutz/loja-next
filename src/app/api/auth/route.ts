@@ -1,9 +1,11 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { setCookie } from "nookies";
 import { ILoginResponse } from "../../../services/api/auth/interface";
 
-export async function POST(req: Request, ctx: any) {
+export async function POST(req: Request) {
+  "use server";
   const body = await req.json();
+  const cookieStore = cookies();
 
   const response = await fetch(`${process.env.USER_API_URL}/login`, {
     method: "POST",
@@ -20,6 +22,6 @@ export async function POST(req: Request, ctx: any) {
       { status: response.status }
     );
 
-  setCookie(ctx, "token", json.token);
+  cookieStore.set("token", json.token);
   return NextResponse.json(json);
 }
