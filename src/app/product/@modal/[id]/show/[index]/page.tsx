@@ -16,7 +16,7 @@ const ProductModal = async ({ params }: ModalProps) => {
   ).json();
 
   return (
-    <Modal>
+    <Modal.Wrapper>
       <Image
         alt={product.title}
         src={product.images[+params.index]}
@@ -24,7 +24,7 @@ const ProductModal = async ({ params }: ModalProps) => {
         height={700}
         className="rounded bg-gray-300"
       />
-    </Modal>
+    </Modal.Wrapper>
   );
 };
 
