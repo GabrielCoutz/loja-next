@@ -10,6 +10,7 @@ import { Form } from "../../components/Form";
 import { loginUser } from "../../services/api/auth";
 import { Ui } from "../../components/UI";
 import { useFetch } from "../../hooks/useFetch";
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
   const loginFormMethods = useForm<IloginSchema>({
@@ -17,10 +18,12 @@ export const LoginForm = () => {
   });
   const { error, loading, send } = useFetch(loginUser);
   const { handleSubmit } = loginFormMethods;
+  const { push } = useRouter();
 
   const handleLogin = async (payload: IloginSchema) => {
     const result = await send(payload);
-    if (result) console.log(result);
+
+    if (result) push("/profile");
   };
 
   return (
