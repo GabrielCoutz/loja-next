@@ -1,13 +1,22 @@
-import { cookies } from "next/headers";
-
+import Link from "next/link";
 import React from "react";
-import { getUser } from "../../services/api/user";
+import { Button } from "../../components/Button";
+import { getCurrentUser } from "../../helpers/getCurrentUser";
 
 const Profile = async () => {
-  const userId = cookies().get("userId")?.value!;
-  const user = await getUser(userId);
+  const user = await getCurrentUser();
 
-  return <pre>{JSON.stringify(user, null, 2)}</pre>;
+  return (
+    <section className="space-y-6 container mx-auto flex flex-col items-center">
+      <h1 className="text-center font-semibold text-slate-800 text-2xl">
+        Bem vindo, {user.name}
+      </h1>
+      <span className="block text-center italic">{user.email}</span>
+      <Link href="/profile/delete">
+        <Button.Danger>Deletar conta</Button.Danger>
+      </Link>
+    </section>
+  );
 };
 
 export default Profile;
