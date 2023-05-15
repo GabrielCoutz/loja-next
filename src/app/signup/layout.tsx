@@ -6,8 +6,6 @@ interface ISignupLayout {
 }
 
 const SignupLayout = ({ children, modal }: ISignupLayout) => {
-  console.log(modal);
-
   return (
     <>
       {modal}

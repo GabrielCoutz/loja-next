@@ -4,7 +4,7 @@ export const loginUser = async (
   payload: ILoginPayload
 ): Promise<ILoginResponse> => {
   const result = await (
-    await fetch("/api/auth", {
+    await fetch("/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
