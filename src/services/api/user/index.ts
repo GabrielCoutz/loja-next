@@ -17,7 +17,9 @@ export const createUser = async (
 };
 
 export const getUser = async (id: string): Promise<IUser> => {
-  const result = await (await fetch(`/api/user/${id}`)).json();
+  const result = await (
+    await fetch(`http://localhost:3001/api/user/${id}`)
+  ).json();
 
   return result;
 };

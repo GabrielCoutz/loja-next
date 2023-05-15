@@ -9,7 +9,7 @@ interface IGetParams {
 export async function GET(_: any, { params }: IGetParams) {
   const userId = params.id;
 
-  const response = await fetch(`${process.env.API_BASE_URL}/user/${userId}`);
+  const response = await fetch(`${process.env.API_BASE_URL}/users/${userId}`);
 
   if (response.status === 404)
     return NextResponse.json(
