@@ -1,13 +1,13 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { ILoginResponse } from "../../../services/api/auth/interface";
+import { ILoginResponse } from "../../../../services/api/auth/interface";
 
 export async function POST(req: Request) {
   "use server";
   const body = await req.json();
   const cookieStore = cookies();
 
-  const response = await fetch(`${process.env.USER_API_URL}/login`, {
+  const response = await fetch(`${process.env.API_BASE_URL}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,5 +23,6 @@ export async function POST(req: Request) {
     );
 
   cookieStore.set("token", json.token);
+  cookieStore.set("userId", json.id);
   return NextResponse.json(json);
 }
