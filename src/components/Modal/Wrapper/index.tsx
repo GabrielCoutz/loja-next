@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { ReactNode, useRef } from "react";
+import React, { MouseEvent, ReactNode, useRef } from "react";
 
 interface WrapperProps {
   children: ReactNode;
@@ -12,7 +12,7 @@ export const Wrapper = ({ children, className }: WrapperProps) => {
   const backgroundRef = useRef<null | HTMLDivElement>(null);
   const { back } = useRouter();
 
-  const handleOutsideClick = (e: MouseEvent) => {
+  const handleOutsideClick = (e: MouseEvent<HTMLDivElement>) => {
     const clickedElement = e.target;
     const backgroundWasClicked = clickedElement === backgroundRef.current;
 
