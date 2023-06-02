@@ -12,7 +12,7 @@ interface ModalProps {
 
 const ProductModal = async ({ params }: ModalProps) => {
   const product: IProduct = await (
-    await fetch(`${process.env.PRODUCTS_API_URL}/products/${params.id}`)
+    await fetch(`${process.env.API_PRODUCTS_URL}/products/${params.id}`)
   ).json();
 
   return (
