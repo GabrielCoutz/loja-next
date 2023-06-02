@@ -23,3 +23,9 @@ export const getUser = async (id: string): Promise<IUser> => {
 
   return result;
 };
+
+export const deleteUser = async (id: string): Promise<void> => {
+  await fetch(`http://localhost:3001/api/user/${id}`, {
+    method: "DELETE",
+  });
+};
